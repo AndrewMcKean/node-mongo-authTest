@@ -104,3 +104,4 @@ dist
 .tern-port
 
 # Node modules
+node_modules
