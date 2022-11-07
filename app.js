@@ -42,6 +42,7 @@ app.post("/register", (request, response) => {
       // create a new user instance and collect the data
       const user = new User({
         email: request.body.email,
+        username: request.body.username,
         password: hashedPassword,
       });
 
