@@ -100,6 +100,7 @@ app.post("/login", (request, response) => {
             {
               userId: user._id,
               userEmail: user.email,
+              userName: user.username,
             },
             "RANDOM-TOKEN",
             { expiresIn: "24h" }
@@ -136,7 +137,7 @@ app.get("/free-endpoint", (request, response) => {
 
 // authentication endpoint
 app.get("/auth-endpoint", auth, (request, response) => {
-  response.json({ message: User.username });
+  response.json({ message: "You are authorized" });
 });
 
 module.exports = app;
