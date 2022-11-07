@@ -135,8 +135,8 @@ app.get("/free-endpoint", (request, response) => {
   response.json({ message: "You are free to access me anytime" });
 });
 
-// authentication endpoint
-app.get("/auth-endpoint", auth, (request, response) => {
+// dashboard endpoint for authenticated users
+app.get("/dashboard", auth, (request, response) => {
   response.json({ message: "You are authorized" });
 });
 
