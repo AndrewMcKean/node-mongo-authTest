@@ -4,7 +4,6 @@ const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./db/userModel");
-const Image = require("./db/imageModel");
 const auth = require("./auth");
 
 
