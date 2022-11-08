@@ -8,7 +8,9 @@ const auth = require("./auth");
 
 // body parser configuration
 app.use(bodyParser.json());
-  app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '2mb'}));
+app.use(bodyParser.urlencoded({limit: '2mb', extended: true }));
+
 
 app.get("/", (request, response, next) => {
   response.json({ message: "Hey! This is your server response!" });
