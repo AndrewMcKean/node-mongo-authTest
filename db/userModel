@@ -20,9 +20,10 @@ const UserSchema = new mongoose.Schema({
     unique: false,
   },
 
-  profileImg: {
-    type: String,
-    required: [true, "Please provide a profile picture"],
+  photoMap: {
+    type: Map,
+    of: String,
+    required: [true, "Please provide a photo map"],
     unique: false,
   },
 
@@ -32,13 +33,6 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide a task map"],
     unique: false,
   },
-
-  photoMap: {
-    type: Map,
-    of: String,
-    required: [true, "Please provide a photo map"],
-    unique: false,
-  }
 })
 
 module.exports = mongoose.model.Users || mongoose.model("Users", UserSchema);
