@@ -29,14 +29,14 @@ const UserSchema = new mongoose.Schema({
   taskMap: {
     type: Map,
     of: String,
-    required: false,
+    required: [true, "Please provide a task map"],
     unique: false,
   },
 
   photoMap: {
     type: Map,
     of: String,
-    required: false,
+    required: [true, "Please provide a photo map"],
     unique: false,
   }
 })
