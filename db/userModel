@@ -19,9 +19,9 @@ const UserSchema = new mongoose.Schema({
     unique: false,
   },
 
-  profilePic: {
+  profileImg: {
     type: String,
-    required: [false, "Please provide a profile picture"],
+    required: [true, "Please provide a profile picture"],
     unique: false,
   }
 })

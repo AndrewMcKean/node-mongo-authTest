@@ -44,7 +44,7 @@ app.post("/register", (request, response) => {
         email: request.body.email,
         username: request.body.username,
         password: hashedPassword,
-        profilePic: request.body.profilePic,
+        profileImg: request.body.profileImg,
       });
 
       // save the new user
@@ -102,7 +102,7 @@ app.post("/login", (request, response) => {
               userId: user._id,
               userEmail: user.email,
               userName: user.username,
-              profilePic: user.profilePic,
+              profileImg: user.profileImg,
             },
             "RANDOM-TOKEN",
             { expiresIn: "24h" }
