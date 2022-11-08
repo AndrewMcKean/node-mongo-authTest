@@ -4,7 +4,9 @@ const bodyParser = require('body-parser');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("./db/userModel");
+const Image = require("./db/imageModel");
 const auth = require("./auth");
+
 
 // body parser configuration
 app.use(bodyParser.json({limit: '2mb'}));
@@ -46,6 +48,8 @@ app.post("/register", (request, response) => {
         username: request.body.username,
         password: hashedPassword,
         profileImg: request.body.profileImg,
+        taskMap: {},
+        imageMap: {},
       });
 
       // save the new user
