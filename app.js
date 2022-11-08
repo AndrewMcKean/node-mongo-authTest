@@ -48,9 +48,8 @@ app.post("/register", (request, response) => {
         email: request.body.email,
         username: request.body.username,
         password: hashedPassword,
-        profileImg: request.body.profileImg,
-        taskMap: emptyTaskMap,
-        imageMap: emptyImageMap,
+        taskMap: {"taskDesc" : "taskStatus"},
+        imageMap: {"profileImg" : request.body.profileImg},
       });
 
       // save the new user
