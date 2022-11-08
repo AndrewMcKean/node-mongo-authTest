@@ -43,13 +43,15 @@ app.post("/register", (request, response) => {
     .hash(request.body.password, 10)
     .then((hashedPassword) => {
       // create a new user instance and collect the data
+      const emptyTaskMap = Object.create(null);
+      const emptyImageMap = Object.create(null);
       const user = new User({
         email: request.body.email,
         username: request.body.username,
         password: hashedPassword,
         profileImg: request.body.profileImg,
-        taskMap: {},
-        imageMap: {},
+        taskMap: emptyTaskMap,
+        imageMap: emptyImageMap,
       });
 
       // save the new user
