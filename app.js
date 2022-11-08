@@ -46,7 +46,7 @@ app.post("/register", (request, response) => {
         email: request.body.email,
         username: request.body.username,
         password: hashedPassword,
-        photoMap: request.body.imgMap,
+        photoMap: request.body.photoMap,
         taskMap: request.body.taskMap,
       });
 
