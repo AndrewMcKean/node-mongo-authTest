@@ -103,7 +103,6 @@ app.post("/login", (request, response) => {
               userId: user._id,
               userEmail: user.email,
               userName: user.username,
-              profileImg: user.profileImg,
             },
             "RANDOM-TOKEN",
             { expiresIn: "24h" }
