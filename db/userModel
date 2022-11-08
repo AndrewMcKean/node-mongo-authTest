@@ -18,6 +18,12 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please provide a password!"],
     unique: false,
   },
+
+  profilePic: {
+    type: String,
+    required: [false, "Please provide a profile picture"],
+    unique: false,
+  }
 })
 
 module.exports = mongoose.model.Users || mongoose.model("Users", UserSchema);
