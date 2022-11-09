@@ -46,6 +46,7 @@ app.post("/register", (request, response) => {
         email: request.body.email,
         username: request.body.username,
         password: hashedPassword,
+        profileImg: request.body.profileImg,
         photoMap: request.body.photoMap,
         taskMap: request.body.taskMap,
       });
@@ -114,6 +115,7 @@ app.post("/login", (request, response) => {
           response.status(200).send({
             message: "Login Successful",
             email: user.email,
+            profileImg: user.profileImg,
             photoMap: user.photoMap,
             taskMap: user.taskMap,
             token,
