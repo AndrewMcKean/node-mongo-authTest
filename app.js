@@ -137,7 +137,7 @@ app.post("/login", (request, response) => {
 });
 
 // updatePhoto endpoint
-app.post("/updatephotos", (request, response) => {
+app.get("/updatephotos", (request, response) => {
   // check if email exists
   User.findOne({ email: request.body.email })
 
