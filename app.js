@@ -136,9 +136,27 @@ app.post("/login", (request, response) => {
     });
 });
 
-// free endpoint
-app.get("/free-endpoint", (request, response) => {
-  response.json({ message: "You are free to access me anytime" });
+// updatePhoto endpoint
+app.post("/updatephotos", (request, response) => {
+  // check if email exists
+  User.findOne({ email: request.body.email })
+
+    // if email exists
+    .then((user) => {
+        user.photoMap = request.body.photoMap;
+
+          //   return success response
+          response.status(200).send({
+            message: "Images saved successfully.",
+          });
+        })
+    // catch error if email does not exist
+    .catch((e) => {
+      response.status(404).send({
+        message: "Email not found",
+        e,
+      });
+    });
 });
 
 // dashboard endpoint for authenticated users
