@@ -144,12 +144,16 @@ app.post("/updatephotos", (request, response) => {
     // if email exists
     .then((user) => {
         user.photoMap = request.body.photoMap;
-
-          //   return success response
-          response.status(200).send({
+        user.save()
+          .then(
+            //   return success response
+            response.status(200).send({
             message: "Images saved successfully.",
-          });
+          })
+          )
         })
+
+
     // catch error if email does not exist
     .catch((e) => {
       response.status(404).send({
