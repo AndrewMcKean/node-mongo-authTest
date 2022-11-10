@@ -35,13 +35,13 @@ app.use((req, res, next) => {
   next();
 });
 
-// register endpoint
+//Register endpoint
 app.post("/register", (request, response) => {
-  // hash the password
+  //Hash the password
   bcrypt
     .hash(request.body.password, 10)
     .then((hashedPassword) => {
-      // create a new user instance and collect the data
+      //Create a new user instance and collect the data
       const user = new User({
         email: request.body.email,
         username: request.body.username,
@@ -51,17 +51,17 @@ app.post("/register", (request, response) => {
         taskMap: request.body.taskMap,
       });
 
-      // save the new user
+      //Save the new user
       user
         .save()
-        // return success if the new user is added to the database successfully
+        //Return success if the new user is added to the database successfully
         .then((result) => {
           response.status(201).send({
             message: "User Created Successfully",
             result,
           });
         })
-        // catch error if the new user wasn't added successfully to the database
+        //Catch error if the new user wasn't added successfully to the database
         .catch((error) => {
           response.status(500).send({
             message: "Error creating user",
@@ -69,7 +69,7 @@ app.post("/register", (request, response) => {
           });
         });
     })
-    // catch error if the password hash isn't successful
+    //Catch error if the password hash isn't successful
     .catch((e) => {
       response.status(500).send({
         message: "Password was not hashed successfully",
@@ -78,21 +78,21 @@ app.post("/register", (request, response) => {
     });
 });
 
-// login endpoint
+//login endpoint
 app.post("/login", (request, response) => {
-  // check if email exists
+  //Check if email exists
   User.findOne({ email: request.body.email })
 
-    // if email exists
+    //If email exists
     .then((user) => {
-      // compare the password entered and the hashed password found
+      //Compare the password entered and the hashed password found
       bcrypt
         .compare(request.body.password, user.password)
 
-        // if the passwords match
+        //If the passwords match
         .then((passwordCheck) => {
 
-          // check if password matches
+          //Check if password matches
           if(!passwordCheck) {
             return response.status(400).send({
               message: "Incorrect password",
@@ -100,7 +100,7 @@ app.post("/login", (request, response) => {
             });
           }
 
-          //   create JWT token
+          //Create JWT token
           const token = jwt.sign(
             {
               userId: user._id,
@@ -111,7 +111,7 @@ app.post("/login", (request, response) => {
             { expiresIn: "24h" }
           );
 
-          //   return success response
+          //Return success response
           response.status(200).send({
             message: "Login Successful",
             email: user.email,
@@ -121,7 +121,7 @@ app.post("/login", (request, response) => {
             token,
           });
         })
-        // catch error if password does not match
+        //Catch error if password doesn't match
         .catch((error) => {
           response.status(400).send({
             message: "Incorrect password",
@@ -129,6 +129,33 @@ app.post("/login", (request, response) => {
           });
         });
     })
+    //Catch error if email doesn't exist
+    .catch((e) => {
+      response.status(404).send({
+        message: "Email not found",
+        e,
+      });
+    });
+});
+
+//Update photo endpoint
+app.post("/updatephotos", (request, response) => {
+  //Find user
+  User.findOne({ email: request.body.email })
+
+    //If email exists
+    .then((user) => {
+        user.photoMap = request.body.photoMap;
+        user.save()
+          .then(
+            //Return success response
+            response.status(200).send({
+            message: "Images saved successfully.",
+          })
+          )
+        })
+
+
     // catch error if email does not exist
     .catch((e) => {
       response.status(404).send({
@@ -138,25 +165,24 @@ app.post("/login", (request, response) => {
     });
 });
 
-// updatePhoto endpoint
-app.post("/updatephotos", (request, response) => {
-  // check if email exists
+//Update tasks endpoint
+app.post("/updatetasks", (request, response) => {
+  //Find user 
   User.findOne({ email: request.body.email })
 
-    // if email exists
+  //If email exists
     .then((user) => {
-        user.photoMap = request.body.photoMap;
-        user.save()
-          .then(
-            //   return success response
-            response.status(200).send({
-            message: "Images saved successfully.",
-          })
-          )
+      user.taskMap = request.body.taskMap;
+      user.save()
+      .then(
+        //Return success response
+        response.status(200).send({
+          message: "Tasks updated successfully.",
         })
+      )
+    })
 
-
-    // catch error if email does not exist
+    //Catch error if email does not exist
     .catch((e) => {
       response.status(404).send({
         message: "Email not found",
