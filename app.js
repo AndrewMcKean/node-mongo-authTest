@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({limit: '2mb', extended: true }));
 
 
 app.get("/", (request, response, next) => {
-  response.json({ message: "Hey! This is your server response!" });
+  response.json({ message: "Hi Therapy Box! (If this is me troubleshooting, the server is up)" });
   next();
 });
 
