@@ -34,8 +34,10 @@ const UserSchema = new mongoose.Schema({
   },
 
   taskMap: {
-    type: Map,
-    of: String,
+    [taskNum]: {
+      task: String,
+      complete: Boolean
+    },
     required: [true, "Please provide a task map."],
     unique: false,
   },
