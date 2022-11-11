@@ -115,6 +115,7 @@ app.post("/login", (request, response) => {
           response.status(200).send({
             message: "Login Successful",
             email: user.email,
+            username: user.username,
             profileImg: user.profileImg,
             photoMap: user.photoMap,
             taskMap: user.taskMap,
